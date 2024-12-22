@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Meja - PesanMeja</title>
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  
+<body>
+  <header>
+    <h1>PesanMeja - Buat Pemesanan</h1>
+    <nav>
+      <ul>
+        <ul>
+          <li><a href="/index">Beranda</a></li>
+          <li><a href="/booking">Pemesanan</a></li>
+          <li><a href="/chatbot">Chatbot</a></li>
+          <li><a href="/admin">Dashboard Admin</a></li>
+        </ul>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Formulir Pemesanan</h2>
+<form action="/api/booking/buat" method="POST">
+  <!-- Nama Pengguna -->
+  <label for="namaPengguna">Nama:</label>
+  <input type="text" id="namaPengguna" name="namaPengguna" placeholder="Atas nama siapa?" required>
+  
+  <label for="email">email:</label>
+  <input type="text" id="email" name="email" placeholder="Masukkan Email anda?" required>
+  
+  <!-- Tanggal -->
+  <label for="tanggal">Tanggal:</label>
+  <input type="date" id="tanggal" name="tanggal" placeholder="dd/mm/yy" required>
+  
+  <!-- Waktu -->
+  <label for="waktu">Waktu:</label>
+  <input type="time" id="waktu" name="waktu" placeholder="Masukkan Jam" required>
+  
+  <!-- Jumlah Tamu -->
+  <label for="jumlahTamu">Jumlah Tamu:</label>
+  <input type="number" id="jumlahTamu" name="jumlahTamu" placeholder="Untuk berapa orang?" required>
+  
+  <!-- Tipe Meja -->
+  <label for="tipeMeja">Tipe Meja:</label>
+  <select id="tipeMeja" name="tipeMeja" required>
+    <option value="">Pilih Tipe Meja</option>
+    <option value="Regular Table">Regular Table</option>
+    <option value="Private Dining Tables">Private Dining Tables</option>
+    <option value="Bar Table">Bar Table</option>
+    <option value="Outdoor Table">Outdoor Table</option>
+    <option value="Chef's Table">Chef's Table</option>
+    <option value="Romantic Table">Romantic Table</option>
+    <option value="VIP Table">VIP Table</option>
+  </select>
+  
+  <!-- Catatan -->
+  <label for="catatan">Detail:</label>
+  <textarea id="catatan" name="catatan" placeholder="Masukkan Catatan mengenai detail meja anda"></textarea>
+  
+  <!-- Tombol Submit -->
+  <button type="submit">Buat Pemesanan</button>
+</form>
+
+
+
+  <footer>
+    <p>&copy; 2024 PesanMeja - Dibuat oleh Azhani Wydjhe Putri dan Yola Aprilia Putri.</p>
+  </footer>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Mencegah form submit biasa
+        
+        try {
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            const response = await fetch('/api/booking/buat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                alert('Pemesanan berhasil! Silakan cek email Anda untuk konfirmasi.');
+                window.location.href = '/'; // Redirect ke halaman utama
+            } else {
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan. Silakan coba lagi.');
+        }
+    });
+    </script>
+</body>
+</html>

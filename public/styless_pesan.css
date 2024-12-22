@@ -1,0 +1,216 @@
+/* Mengatur font dasar dan latar belakang */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #007bff;
+    padding: 10px 0;
+    color: white;
+    text-align: center;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header .nav-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+header .nav-links a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    background-color: #28a745;
+    /* Warna hijau */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+footer {
+    text-align: center;
+    background-color: #007bff;
+    /* Menggunakan warna biru pada footer */
+    color: white;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+/* Responsif untuk layar lebih kecil */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    button {
+        font-size: 1.2rem;
+    }
+
+    kursi-grid {
+        grid-template-columns: repeat(3, 1fr);
+        /* Tiga kolom di layar kecil */
+    }
+}
+
+/* Styling untuk grid kursi */
+.kursi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* Lima kolom (A B C D E) */
+    grid-gap: 10px;
+    margin-top: 10px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+/* Hover hanya diterapkan pada kursi yang tidak dipilih */
+.seat:not(.selected):hover {
+    background-color: #ddd;
+}
+
+/* Jika kursi sudah dipilih, warnanya tetap hijau */
+.seat.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Jika kursi sudah dipilih dan hover, biarkan warnanya tetap hijau */
+.seat.selected:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+.kursi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.seat.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.seat:hover {
+    background-color: #ddd;
+}

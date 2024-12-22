@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAI Web | Jadwal KA Minangkabau Express</title>
+    	<link rel="icon" href="/img/kai.png">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles_jadwal.css">
+</head>
+
+<body>
+
+    {{> navbar}}
+
+    <!-- Main Content -->
+    <main>
+        <div class="header-subnav">
+            <h1>Jadwal Kereta Api Sumatera Barat</h1>
+            <nav class="sub-nav">
+                <a href="/jadwal//pariaman">Pariaman Express</a>
+                <a href="/jadwal/minangkabau" class="active">Minangkabau Express</a>
+                <a href="/jadwal/lembah-anai">Lembah Anai</a>
+            </nav>
+        </div>
+        <!-- Lembah Anai Schedule -->
+        <section id="lembah_anai" class="jadwal-section">
+            <h2>KA Minangkabau Express</h2>
+            {{#each grupJadwal}}
+            <h3>Jadwal {{@key}}</h3>
+            <table class="jadwal-table">
+                <thead>
+                    <tr>
+                        <th>Jadwal</th>
+                        <th>Stasiun</th>
+                        <th>Datang</th>
+                        <th>Berangkat</th>
+                        <th>Harga</th>
+                        <th>KA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each this}}
+                    <tr>
+                        <td>{{Jadwal}}</td>
+                        <td>{{Stasiun}}</td>
+                        <td>{{Datang}}</td>
+                        <td>{{Berangkat}}</td>
+                        <td>Rp {{Harga}}</td>
+                        <td>{{KA}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{/each}}
+        </section>
+    </main>
+
+    {{> footer}}
+</body>
+
+</html>

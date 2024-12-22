@@ -1,0 +1,198 @@
+/* Mengatur font dasar dan latar belakang */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
+	/* Warna latar belakang yang konsisten dengan pesan tiket */
+}
+
+/* Header */
+.header {
+	background-color: #007bff;
+	/* Warna biru yang sama dengan pesan tiket */
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+}
+
+.header .logo {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: white;
+}
+
+a.logo {
+	color: white;
+	text-decoration-line: none;
+	text-decoration: none;
+}
+
+.nav {
+	display: flex;
+	gap: 1.5rem;
+}
+
+.nav .nav-link {
+	color: white;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 0.5rem 1rem;
+}
+
+.nav .nav-link:hover {
+	background-color: #0056b3;
+	/* Warna hover yang lebih gelap dari biru */
+	border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+	background-color: #f8f9f9;
+	text-align: center;
+	padding: 2rem;
+}
+
+.hero h1 {
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+	color: #007bff;
+	/* Warna biru yang konsisten */
+}
+
+.hero p {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+}
+
+.cta-button {
+	background-color: #007bff;
+	/* Warna biru yang konsisten */
+	color: white;
+	padding: 0.75rem 2rem;
+	font-size: 1rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-decoration: none;
+	/* Menghapus garis bawah */
+}
+
+.cta-button:hover {
+	background-color: #0056b3;
+	/* Warna biru hover yang lebih gelap */
+}
+
+
+/* Features Section */
+.features {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 30px;
+}
+
+.feature-item {
+	text-align: center;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	width: 30%;
+}
+
+.feature-item h2 {
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+}
+
+.feature-item p {
+	font-size: 1rem;
+	color: #555;
+}
+
+footer {
+	text-align: center;
+	background-color: #007bff;
+	/* Menggunakan warna biru pada footer */
+	color: white;
+	padding: 10px 0;
+	margin-top: 30px;
+}
+
+/* Styling untuk Formulir Pemesanan Tiket */
+.pesan-tiket {
+	max-width: 600px;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pesan-tiket h1 {
+	font-size: 2rem;
+	margin-bottom: 20px;
+}
+
+.pesan-tiket .form-group {
+	margin-bottom: 15px;
+}
+
+.pesan-tiket label {
+	font-weight: bold;
+}
+
+.pesan-tiket input,
+.pesan-tiket select {
+	width: 100%;
+	padding: 10px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.pesan-tiket button {
+	padding: 12px;
+	background-color: #007bff;
+	/* Sesuaikan warna tombol dengan pesan tiket */
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.pesan-tiket button:hover {
+	background-color: #0056b3;
+	/* Warna biru hover */
+}
+
+/* Table Styles */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+
+table th,
+table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+
+table th {
+	background-color: #4CAF50;
+	color: white;
+	font-weight: bold;
+}
+
+table tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+table tr:hover {
+	background-color: #ddd;
+}

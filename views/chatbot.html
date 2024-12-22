@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Bantuan - PesanMeja</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/logo.png">
+    <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
+    <style>
+      /* Tambahan CSS untuk memisahkan pesan user dan chatbot */
+      #chatMessages {
+        border: 1px solid #ccc;
+        padding: 10px;
+        height: 300px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+      }
+      
+      .user-message {
+        text-align: right;
+        color: #000;
+        background-color: #e1e1e1;
+        padding: 5px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+      }
+      
+      .chatbot-message {
+        text-align: left;
+        color: #fff;
+        background-color: #4CAF50;
+        padding: 5px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+      }
+
+      #chatForm {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #chatInput {
+        width: 80%;
+        padding: 5px;
+      }
+
+      button {
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <header>
+      <h1>Chatbot Bantuan</h1>
+      <nav>
+        <ul>
+          <li><a href="/index">Beranda</a></li>
+          <li><a href="/booking">Pemesanan</a></li>
+          <li><a href="/chatbot">Chatbot</a></li>
+          <li><a href="/admin">Dashboard Admin</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Bantuan dengan Chatbot</h2>
+      <div id="chatContainer">
+        <div id="chatMessages">
+          <!-- Pesan akan ditampilkan di sini -->
+        </div>
+        <form id="chatForm">
+          <input id="chatInput" type="text" placeholder="Tulis pesan Anda..." required>
+          <button type="submit">Kirim</button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 PesanMeja - Dibuat oleh Azhani Wydjhe Putri dan Yola Aprilia Putri.</p>
+    </footer>
+
+    <script>
+      const socket = io(5001); // Hubungkan ke server dengan Socket.IO
+
+      // === Bagian Chatbot ===
+      const chatForm = document.getElementById('chatForm');
+      const chatInput = document.getElementById('chatInput');
+      const chatMessages = document.getElementById('chatMessages');
+
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = chatInput.value;
+        if (message.trim() !== '') {
+          addMessageToChat('User', message, 'user-message'); // Tampilkan pesan user
+          socket.emit('chatMessage', message); // Kirim pesan ke server
+          chatInput.value = ''; // Kosongkan input
+        }
+      });
+
+      // Terima balasan dari server
+      socket.on('botReply', (reply) => {
+        addMessageToChat('Chatbot', reply, 'chatbot-message'); // Tampilkan balasan chatbot
+      });
+
+      function addMessageToChat(sender, message, className) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add(className);
+        messageElement.textContent = `${sender}: ${message}`;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll otomatis ke bawah
+      }
+    </script>
+  </body>
+</html>

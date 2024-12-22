@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="icon" href="/img/logo.png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="register-container">
+    <h1>Daftar Akun Baru</h1>
+    <form id="registerForm">
+      <label for="name">Nama:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      
+      <button type="submit">Daftar</button>
+    </form>
+    <p>Sudah punya akun? <a href="/login">Login di sini</a>.</p>
+  </div>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert('Registrasi berhasil! Silakan login.');
+          window.location.href = '/login';
+        } else {
+          alert(`Gagal: ${data.message}`);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan. Silakan coba lagi.');
+      }
+    });
+  </script>
+</body>
+</html>

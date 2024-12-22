@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Tiket</title>
+    	<link rel="icon" href="/img/kai.png">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styless_pesan.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+</head>
+
+<body>
+
+    {{> navbar}}
+
+    <main>
+        <div class="container">
+            <h1>Pemesanan Tiket Kereta</h1>
+            <form action="/pesan-tiket" method="POST" class="form-container">
+                <!-- Nama Penumpang -->
+                <div class="form-group">
+                    <label for="namaPenumpang">Nama Penumpang:</label>
+                    <input type="text" id="namaPenumpang" name="namaPenumpang" placeholder="Masukkan Nama Anda"
+                        required>
+                </div>
+
+                <!-- Email Penumpang -->
+                <div class="form-group">
+                    <label for="emailPenumpang">Email Penumpang:</label>
+                    <input type="email" id="emailPenumpang" name="emailPenumpang" placeholder="Masukkan Email Anda"
+                        required>
+                </div>
+
+                <!-- NIK -->
+                <div class="form-group">
+                    <label for="nik">NIK (Nomor Induk Kependudukan):</label>
+                    <input type="text" id="nik" name="nik" placeholder="Masukkan NIK" required>
+                </div>
+
+                <!-- Jenis Kereta -->
+                <div class="form-group">
+                    <label for="jenisKereta">Jenis Kereta</label>
+                    <select id="jenisKereta" name="jenisKereta" onchange="updateStasiunOptions()" required>
+                        <option value="" disabled selected>Pilih jenis kereta</option>
+                        <option value="Pariaman Express">Pariaman Express</option>
+                        <option value="Lembah Anai">Lembah Anai</option>
+                        <option value="Minangkabau Express">Minangkabau Express</option>
+                    </select>
+                </div>
+
+                <!-- Asal -->
+                <div class="form-group">
+                    <label for="asal">Asal</label>
+                    <select id="asal" name="asal" onchange="getJadwalKereta()" required>
+                        <option value="" disabled selected>Pilih Asal</option>
+                    </select>
+                </div>
+
+                <!-- Tujuan -->
+                <div class="form-group">
+                    <label for="tujuan">Tujuan</label>
+                    <select id="tujuan" name="tujuan" required>
+                        <option value="" disabled selected>Pilih Tujuan</option>
+                    </select>
+                </div>
+
+                <!-- Tanggal Keberangkatan -->
+                <div class="form-group">
+                    <label for="tanggalKeberangkatan">Tanggal Keberangkatan:</label>
+                    <input type="date" id="tanggalKeberangkatan" name="tanggalKeberangkatan" onfocus='this.showPicker()'
+                        required>
+                </div>
+
+                <!-- Harga Tiket -->
+                <div class="form-group">
+                    <label for="hargaTiket">Harga Tiket (IDR):</label>
+                    <input type="number" id="hargaTiket" name="hargaTiket" readonly required>
+                </div>
+
+                <!-- Pilih Nomor Kursi -->
+                <div class="form-group">
+                    <label for="nomorKursi">Pilih Nomor Kursi:</label>
+                    <div class="kursi-grid">
+                        <div class="seat" data-seat="A1">A1</div>
+                        <div class="seat" data-seat="A2">A2</div>
+                        <div class="seat" data-seat="A3">A3</div>
+                        <div class="seat" data-seat="A4">A4</div>
+
+                        <div class="seat" data-seat="B1">B1</div>
+                        <div class="seat" data-seat="B2">B2</div>
+                        <div class="seat" data-seat="B3">B3</div>
+                        <div class="seat" data-seat="B4">B4</div>
+
+                        <div class="seat" data-seat="C1">C1</div>
+                        <div class="seat" data-seat="C2">C2</div>
+                        <div class="seat" data-seat="C3">C3</div>
+                        <div class="seat" data-seat="C4">C4</div>
+
+                        <div class="seat" data-seat="D1">D1</div>
+                        <div class="seat" data-seat="D2">D2</div>
+                        <div class="seat" data-seat="D3">D3</div>
+                        <div class="seat" data-seat="D4">D4</div>
+
+                        <div class="seat" data-seat="E1">E1</div>
+                        <div class="seat" data-seat="E2">E2</div>
+                        <div class="seat" data-seat="E3">E3</div>
+                        <div class="seat" data-seat="E4">E4</div>
+
+                        <div class="seat" data-seat="F1">F1</div>
+                        <div class="seat" data-seat="F2">F2</div>
+                        <div class="seat" data-seat="F3">F3</div>
+                        <div class="seat" data-seat="F4">F4</div>
+
+                        <div class="seat" data-seat="G1">G1</div>
+                        <div class="seat" data-seat="G2">G2</div>
+                        <div class="seat" data-seat="G3">G3</div>
+                        <div class="seat" data-seat="G4">G4</div>
+
+                        <div class="seat" data-seat="H1">H1</div>
+                        <div class="seat" data-seat="H2">H2</div>
+                        <div class="seat" data-seat="H3">H3</div>
+                        <div class="seat" data-seat="H4">H4</div>
+
+                        <div class="seat" data-seat="I1">I1</div>
+                        <div class="seat" data-seat="I2">I2</div>
+                        <div class="seat" data-seat="I3">I3</div>
+                        <div class="seat" data-seat="I4">I4</div>
+
+                        <div class="seat" data-seat="J1">J1</div>
+                        <div class="seat" data-seat="J2">J2</div>
+                        <div class="seat" data-seat="J3">J3</div>
+                        <div class="seat" data-seat="J4">J4</div>
+                    </div>
+                </div>
+
+                <br>
+                <label for="jadwal">Pilih Jadwal Keberangkatan:</label>
+                <select id="jadwal" name="jadwal" required>
+                    <option value="" disabled selected>Pilih Jadwal</option>
+                    <!-- Opsi jadwal akan ditambahkan melalui JavaScript -->
+                </select>
+                <br><br>
+
+                <!-- Input Tersembunyi untuk Nomor Kursi -->
+                <input type="hidden" id="nomorKursi" name="nomorKursi" required>
+
+                <button type="submit" class="btn-submit">Pesan Tiket</button>
+            </form>
+        </div>
+    </main>
+
+    {{> footer}}
+
+    <!-- Script -->
+    <script>
+        const keretaDetails = {
+            "Pariaman Express": {
+                stasiun: ["Pariaman", "Pauh Kamba", "Lubuk Alung", "Duku", "Lubuk Buaya", "Tabing", "Air Tawar", "Alai"],
+                harga: 5000
+            },
+            "Lembah Anai": {
+                stasiun: ["Kayutanam", "Sicincin", "Lubuk Alung", "Duku"],
+                harga: 3000
+            },
+            "Minangkabau Express": {
+                stasiun: ["Bandara", "Duku", "Lubuk Buaya", "Tabing", "Air Tawar", "Tarandam", "Alai"],
+                harga: 10000
+            }
+        };
+
+        function updateStasiunOptions() {
+            const jenisKereta = document.getElementById("jenisKereta").value;
+            const asalSelect = document.getElementById("asal");
+            const tujuanSelect = document.getElementById("tujuan");
+            const jadwalKereta = document.getElementById("jadwal");
+            const hargaInput = document.getElementById("hargaTiket");
+
+            // Clear the options
+            asalSelect.innerHTML = "<option value='' disabled selected>Pilih Asal</option>";
+            tujuanSelect.innerHTML = "<option value='' disabled selected>Pilih Tujuan</option>";
+            jadwalKereta.innerHTML = "<option value='' disabled selected>Pilih Jadwal</option>";
+
+            if (keretaDetails[jenisKereta]) {
+                const stasiun = keretaDetails[jenisKereta].stasiun;
+
+                // Populate the Asal and Tujuan with the stations
+                stasiun.forEach(stasiun => {
+                    const option = document.createElement("option");
+                    option.value = stasiun;
+                    option.textContent = stasiun;
+                    asalSelect.appendChild(option);
+
+                    const optionTujuan = document.createElement("option");
+                    optionTujuan.value = stasiun;
+                    optionTujuan.textContent = stasiun;
+                    tujuanSelect.appendChild(optionTujuan);
+                });
+
+                // Set the harga tiket
+                hargaInput.value = keretaDetails[jenisKereta].harga;
+            } else {
+                hargaInput.value = "";
+            }
+        }
+
+        // Pemilihan kursi
+        let selectedSeat = null;
+        const nomorKursiInput = document.getElementById('nomorKursi'); // Ambil input tersembunyi untuk nomor kursi
+
+        const kursiElements = document.querySelectorAll('.seat');
+
+        kursiElements.forEach(kursi => {
+            kursi.addEventListener('click', function () {
+                // Hapus pemilihan kursi sebelumnya
+                if (selectedSeat) {
+                    selectedSeat.classList.remove('selected');
+                }
+
+                // Pilih kursi baru
+                kursi.classList.add('selected');
+                selectedSeat = kursi;
+
+                // Update input tersembunyi dengan nomor kursi yang dipilih
+                nomorKursiInput.value = kursi.dataset.seat;
+
+            });
+        });
+
+        function getJadwalKereta() {
+            let ka = document.getElementById("jenisKereta").value;
+            let stasiun = document.getElementById("asal").value;
+            const jadwalKereta = document.getElementById("jadwal");
+            jadwalKereta.innerHTML = "<option value='' disabled selected>Pilih Jadwal</option>";
+            console.log(ka)
+            console.log(stasiun)
+
+            let data = {
+                'ka': ka,
+                'stasiun': stasiun
+            }
+            return fetch("/api/filterJadwal", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok (${response.status})`);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    console.log(result)
+                    // Populate the Asal and Tujuan with the stations
+                    result.forEach(data => {
+                        const option = document.createElement("option");
+                        option.value = data.Berangkat;
+                        option.textContent = data.Berangkat;
+                        jadwalKereta.appendChild(option);
+                    });
+                    return result;
+                })
+                .catch(error => {
+                    console.error("Error fetching filtered jadwal:", error);
+                    throw error;
+                });
+        }
+    </script>
+</body>
+
+</html>

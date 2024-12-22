@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PesanMeja - Halaman Utama</title>
+  <link rel="icon" href="/img/logo.png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <h1>PesanMeja</h1>
+    </div>
+    <nav>
+      <ul>
+          <li><a href="/index">Beranda</a></li>
+          <li><a href="/booking">Pemesanan</a></li>
+          <li><a href="/chatbot">Chatbot</a></li>
+          <li><a href="/admin">Dashboard Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="intro">
+      <h2>Pesan Meja Anda Sekarang!</h2>
+      <p>Temukan tipe meja terbaik yang cocok sesuai dengan kebutuhan anda.</p>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+      <a href="/booking" class="cta-button">Pesan Sekarang</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 PesanMeja - Dibuat oleh Azhani Wydjhe Putri dan Yola Aprilia Putri.</p>
+  </footer>
+
+  <script>
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const message = urlParams.get('message');
+        
+        if (status && message) {
+            if (status === 'success') {
+                alert(message + '\nSilakan cek email Anda untuk konfirmasi.');
+            } else {
+                alert(message);
+            }
+        }
+    }
+    </script>
+</body>
+</html>
